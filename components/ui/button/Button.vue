@@ -24,3 +24,9 @@ const props = withDefaults(defineProps<Props>(), {
     <slot />
   </Primitive>
 </template>
+
+<style lang="postcss" scoped>
+  button {
+    //color: #ffffff;
+  }
+</style>
