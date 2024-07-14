@@ -14,6 +14,7 @@
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "add": "^2.0.6",
+    "appwrite": "^15.0.0",
     "button": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

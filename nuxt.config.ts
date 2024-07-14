@@ -24,5 +24,13 @@ export default defineNuxtConfig({
                 ital: [100]
             },
         }
-    }
+    },
+    runtimeConfig: {
+        APP_WRITE_ID: process.env.APP_WRITE_ID,
+        DB_ID: process.env.DB_ID,
+        COLLECTION_DEALS: process.env.COLLECTION_DEALS,
+        COLLECTION_CUSTOMERS: process.env.COLLECTION_CUSTOMERS,
+        COLLECTION_COMMENTS: process.env.COLLECTION_COMMENTS,
+        STORAGE_ID: process.env.STORAGE_ID,
+    },
 })
