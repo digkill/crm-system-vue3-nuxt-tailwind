@@ -13,6 +13,7 @@
     "@nuxt/icon": "^1.0.0",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@vueuse/core": "^10.11.0",
     "add": "^2.0.6",
     "appwrite": "^15.0.0",
     "button": "^1.1.1",
