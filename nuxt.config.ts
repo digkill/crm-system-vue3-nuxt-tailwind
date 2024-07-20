@@ -7,7 +7,8 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         'shadcn-nuxt',
         '@nuxtjs/google-fonts',
-        "@nuxt/icon"
+        '@nuxt/icon',
+        '@pinia/nuxt'
     ],
     shadcn: {
         prefix: 'UI',
@@ -32,5 +33,8 @@ export default defineNuxtConfig({
         COLLECTION_CUSTOMERS: process.env.COLLECTION_CUSTOMERS,
         COLLECTION_COMMENTS: process.env.COLLECTION_COMMENTS,
         STORAGE_ID: process.env.STORAGE_ID,
+    },
+    pinia: {
+        storesDirs: ['./store/**']
     },
 })

@@ -1,7 +1,51 @@
 <script setup lang="ts">
-  useHead({
-    title: 'Login'
-  })
+import {useIsLoadingStore} from "~/store/loading.store"
+
+import {ID} from "appwrite"
+import {account} from "~/lib/appwrite"
+import {useAuthStore} from "~/store/auth.store";
+
+useSeoMeta({
+  title: 'Login | CRM System'
+})
+
+const emailRef = ref('')
+const passwordRef = ref('')
+const nameRef = ref('')
+
+const userStore = useAuthStore()
+const isLoadingStore = useIsLoadingStore()
+const router = useRouter()
+
+const login = async () => {
+  isLoadingStore.set({isLoading: true})
+  await account.create(ID.unique(), emailRef.value, passwordRef.value, nameRef.value)
+
+  const response = await account.get()
+
+  if (response) {
+    userStore.set({
+      email: response.email,
+      name: response.name,
+      status: response.status,
+    })
+  }
+
+  clearForm()
+
+  await router.push('/')
+  isLoadingStore.set({isLoading: false})
+
+  function clearForm() {
+    emailRef.value= ''
+    passwordRef.value= ''
+    nameRef.value= ''
+  }
+}
+
+/* watch(emailRef, () => {
+   console.log(emailRef.value)
+ })*/
 </script>
 <template>
   <section class="flex items-center justify-center min-h-screen w-full">
@@ -10,7 +54,13 @@
 
       <form>
 
-        <UIInput placeholder="Email" type="email" class="mb-3"/>
+        <UIInput placeholder="Email" type="email" class="mb-3" v-model="emailRef"/>
+        <UIInput placeholder="Password" type="password" class="mb-3" v-model="passwordRef"/>
+        <UIInput placeholder="Name" type="name" class="mb-3" v-model="nameRef"/>
+        <div class="flex items-center justify-center gap-5">
+          <UIButton type='button'>Sign In</UIButton>
+          <UIButton type='button'>Sign Up</UIButton>
+        </div>
       </form>
     </div>
   </section>
