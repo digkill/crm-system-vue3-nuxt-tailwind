@@ -9,6 +9,8 @@ useSeoMeta({
   title: 'Login | CRM System'
 })
 
+console.log('account', account)
+
 const emailRef = ref('')
 const passwordRef = ref('')
 const nameRef = ref('')
@@ -43,6 +45,11 @@ const login = async () => {
   }
 }
 
+const register = async () => {
+  await account.create(ID.unique(), emailRef.value, passwordRef.value, nameRef.value)
+  await login()
+}
+
 /* watch(emailRef, () => {
    console.log(emailRef.value)
  })*/
@@ -58,8 +65,8 @@ const login = async () => {
         <UIInput placeholder="Password" type="password" class="mb-3" v-model="passwordRef"/>
         <UIInput placeholder="Name" type="name" class="mb-3" v-model="nameRef"/>
         <div class="flex items-center justify-center gap-5">
-          <UIButton type='button'>Sign In</UIButton>
-          <UIButton type='button'>Sign Up</UIButton>
+          <UIButton type='button' @click='login'>Sign In</UIButton>
+          <UIButton type='button' @click='register'>Sign Up</UIButton>
         </div>
       </form>
     </div>

@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: {enabled: false},
@@ -26,15 +25,17 @@ export default defineNuxtConfig({
             },
         }
     },
-    runtimeConfig: {
-        APP_WRITE_ID: process.env.APP_WRITE_ID,
-        DB_ID: process.env.DB_ID,
-        COLLECTION_DEALS: process.env.COLLECTION_DEALS,
-        COLLECTION_CUSTOMERS: process.env.COLLECTION_CUSTOMERS,
-        COLLECTION_COMMENTS: process.env.COLLECTION_COMMENTS,
-        STORAGE_ID: process.env.STORAGE_ID,
-    },
     pinia: {
         storesDirs: ['./store/**']
+    },
+    runtimeConfig: {
+        public: {
+            appWriteId:'NUXT_PUBLIC_APP_WRITE_ID',
+            dbID: 'NUXT_PUBLIC_DB_ID',
+            collectionDeals: 'NUXT_PUBLIC_COLLECTION_DEALS',
+            collectionCustomers: 'NUXT_PUBLIC_COLLECTION_CUSTOMERS',
+            collectionComments: 'NUXT_PUBLIC_COLLECTION_COMMENTS',
+            storageId: 'NUXT_PUBLIC_STORAGE_ID',
+        }
     },
 })
