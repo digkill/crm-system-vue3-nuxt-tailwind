@@ -1,5 +1,9 @@
 <script setup lang="ts">
 
+useSeoMeta({
+  title: 'Home | CRM System',
+})
+
 </script>
 <template>
   <section class="flex flex-col items-center justify-center min-h-screen px-6 lg:px-8">

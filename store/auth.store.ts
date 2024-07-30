@@ -25,7 +25,17 @@ export const useAuthStore = defineStore('auth', {
         },
         set(input: AuthStoreInterface) {
             this.$patch({user: input})
-
         }
     }
+})
+
+export const useIsLoadingStore = defineStore('isLoading', {
+    state: () => ({
+        isLoading: true,
+    }),
+    actions: {
+        set(data: boolean) {
+            this.$patch({isLoading: data})
+        },
+    },
 })

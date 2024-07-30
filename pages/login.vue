@@ -22,9 +22,7 @@ const router = useRouter()
 const login = async () => {
   isLoadingStore.set({isLoading: true})
   await account.create(ID.unique(), emailRef.value, passwordRef.value, nameRef.value)
-
   const response = await account.get()
-
   if (response) {
     userStore.set({
       email: response.email,
