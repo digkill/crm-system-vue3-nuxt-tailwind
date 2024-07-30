@@ -21,7 +21,7 @@ const router = useRouter()
 
 const login = async () => {
   isLoadingStore.set({isLoading: true})
-  await account.create(ID.unique(), emailRef.value, passwordRef.value, nameRef.value)
+  await account.createEmailPasswordSession(emailRef.value, passwordRef.value)
   const response = await account.get()
   if (response) {
     userStore.set({
@@ -36,11 +36,12 @@ const login = async () => {
   await router.push('/')
   isLoadingStore.set({isLoading: false})
 
-  function clearForm() {
-    emailRef.value= ''
-    passwordRef.value= ''
-    nameRef.value= ''
-  }
+}
+
+function clearForm() {
+  emailRef.value= ''
+  passwordRef.value= ''
+  nameRef.value= ''
 }
 
 const register = async () => {
@@ -56,9 +57,7 @@ const register = async () => {
   <section class="flex items-center justify-center min-h-screen w-full">
     <div class="rounded bg-sidebar w-1/4 p-5">
       <h1 class="text-2x1 font-bold text-center mb-5">Sign In</h1>
-
       <form>
-
         <UIInput placeholder="Email" type="email" class="mb-3" v-model="emailRef"/>
         <UIInput placeholder="Password" type="password" class="mb-3" v-model="passwordRef"/>
         <UIInput placeholder="Name" type="name" class="mb-3" v-model="nameRef"/>

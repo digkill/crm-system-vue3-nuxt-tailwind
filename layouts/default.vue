@@ -12,11 +12,13 @@ onMounted(async () => {
     console.log('user', user)
     if (user) store.set(user)
   } catch (error) {
-    router.push('/login')
+    await router.push('/login')
   } finally {
     isLoadingStore.set({isLoading: false})
   }
 })
+
+console.log('isLoadingStore.isLoading', isLoadingStore.isLoading)
 
 </script>
 
@@ -32,7 +34,7 @@ onMounted(async () => {
 
 <style scoped>
 .grid {
-  min-height: 100vh;
+/*  min-height: 100vh;*/
   display: grid;
   grid-template-columns: 1fr 6fr;
 }

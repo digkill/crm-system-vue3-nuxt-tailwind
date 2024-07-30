@@ -8,7 +8,7 @@ const router = useRouter()
 
 const logout = async () => {
   isLoadingStore.set({isLoading: true})
-  await account.deleteSessions('current')
+  await account.deleteSessions()
   store.clear()
   await router.push('/login')
   isLoadingStore.set({isLoading: false})
@@ -17,7 +17,7 @@ const logout = async () => {
 </script>
 <template>
   <aside class="sidebar px-5 py-8 bg-sidebar h-full relative w-full">
-    <NuxtLink to="/" class="mb-15 block">
+    <NuxtLink to="/" class="mb-15 p-8 block">
       <NuxtImg src="/logo.svg" alt="" width="100px" class="mx-auto mb-1"/>
     </NuxtLink>
     <button

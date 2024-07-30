@@ -6,6 +6,10 @@ interface AuthStoreInterface {
     status: boolean
 }
 
+interface DataLoadingInterface {
+    isLoading: boolean
+}
+
 const defaultValue: { user: AuthStoreInterface } = {
     user: {
         email: '',
@@ -30,12 +34,12 @@ export const useAuthStore = defineStore('auth', {
 })
 
 export const useIsLoadingStore = defineStore('isLoading', {
-    state: () => ({
+    state: (): DataLoadingInterface => ({
         isLoading: true,
     }),
     actions: {
-        set(data: boolean) {
-            this.$patch({isLoading: data})
+        set(data: DataLoadingInterface) {
+            this.$patch(data)
         },
     },
 })
