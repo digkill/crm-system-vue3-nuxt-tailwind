@@ -73,7 +73,7 @@ function handleDrop(targetColumn: ColumnInterface) {
               {{ column.name }}
             </div>
             <div>
-
+              <KanbanCreateDeal :refetch="refetch" :status="column.id" />
               <UICard
                   v-for="card in column.items"
                   :key="card.id"
