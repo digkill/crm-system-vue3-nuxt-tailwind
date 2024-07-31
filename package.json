@@ -15,6 +15,7 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@tanstack/vue-query": "^5.51.15",
+    "@vee-validate/nuxt": "^4.13.2",
     "@vueuse/core": "^10.11.0",
     "add": "^2.0.6",
     "appwrite": "^15.0.0",

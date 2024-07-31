@@ -3,8 +3,56 @@ import {useMutation} from "@tanstack/vue-query";
 import {defineProps} from 'vue'
 import {COLLECTION_DEALS, DB_ID} from "~/env";
 import type {DealInterface} from "~/types/deals.types";
+import {useForm} from "vee-validate";
+import {DB} from "~/lib/appwrite";
+import {ID} from "appwrite";
 
 const isOpenForm = ref<boolean>(false)
+
+interface DealFormStateInterface extends Pick<DealInterface, "name" | 'price'>
+{
+  customer: {
+    email: string,
+    name: string,
+  },
+  status: string,
+}
+
+const props = defineProps({
+  status: {
+    type: String,
+    default: '',
+    required: true,
+  },
+  refetch: {
+    type: Function,
+  }
+})
+
+const { handleSubmit, defineField, handleReset } = useForm<DealFormStateInterface>({
+  initialValues: {
+    status: props.status,
+  }
+})
+
+const [name, nameAttrs] = defineField('name')
+const [price, priceAttrs] = defineField('price')
+const [customerEmail, customerEmailAttrs] = defineField('customer.email')
+const [customerName, customerNameAttrs] = defineField('customer.name')
+
+const { mutate, isPending } = useMutation({
+  mutationKey: ['create a new deal'],
+  mutationFn: (data: DealFormStateInterface) =>
+      DB.createDocument(DB_ID, COLLECTION_DEALS, ID.unique(), data),
+  onSuccess() {
+    props.refetch && props.refetch()
+    handleReset()
+  },
+})
+
+const onSubmit = handleSubmit(values => {
+  mutate(values)
+})
 </script>
 
 <template>
@@ -27,8 +75,39 @@ const isOpenForm = ref<boolean>(false)
       />
     </button>
   </div>
-  <form>
+  <form v-if="isOpenForm" @submit="onSubmit" class="form">
+    <UIInput
+        placeholder="Name"
+        v-model="name"
+        v-bind="nameAttrs"
+        type="text"
+        class="input"
+    />
+    <UIInput
+        placeholder="Ammount"
+        v-model="price"
+        v-bind="priceAttrs"
+        type="text"
+        class="input"
+    />
+    <UIInput
+        placeholder="Email"
+        v-model="customerEmail"
+        v-bind="customerEmailAttrs"
+        type="text"
+        class="input"
+    />
+    <UIInput
+        placeholder="Company"
+        v-model="customerName"
+        v-bind="customerNameAttrs"
+        type="text"
+        class="input"
+    />
 
+    <button class="btn" :disabled="isPending">
+      {{ isPending ? 'Loading...' : 'Add' }}
+    </button>
   </form>
 </template>
 <style scoped>
