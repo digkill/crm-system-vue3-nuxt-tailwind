@@ -9,8 +9,6 @@ useSeoMeta({
   title: 'Login | CRM System'
 })
 
-console.log('account', account)
-
 const emailRef = ref('')
 const passwordRef = ref('')
 const nameRef = ref('')

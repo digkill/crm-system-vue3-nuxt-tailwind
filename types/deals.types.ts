@@ -6,8 +6,8 @@ export interface BaseFieldInterface {
 export interface CustomerInterface extends BaseFieldInterface {
     name: string
     email: string
-    avatar: string
-    from_source?: string
+    avatar?: string,
+    source?: string
 }
 
 export interface CommentInterface extends BaseFieldInterface {
@@ -24,7 +24,7 @@ export enum EnumStatus {
 
 export interface DealInterface extends BaseFieldInterface {
     comments: CommentInterface[]
-    customer: CustomerInterface
+    customers: CustomerInterface
     name: string
     price: number
     status: EnumStatus

@@ -10,10 +10,10 @@ const props = defineProps<{
 <template>
   <div
     :class="
-      cn(
-		'rounded-lg bg-card text-card-foreground animation border border-transparent transition-colors hover:border-[#a252c83d]',
+			cn(
+				'rounded-lg bg-card text-card-foreground animation border border-transparent transition-colors hover:border-[#a252c83d]',
 				props.class
-      )
+			)
     "
   >
     <slot />

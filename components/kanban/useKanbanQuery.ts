@@ -10,24 +10,30 @@ export function useKanbanQuery() {
         queryKey: ['deals'],
         queryFn: () => DB.listDocuments(DB_ID, COLLECTION_DEALS),
         select(data) {
-            const newBoard: ColumnInterface[] = [...KANBAN_DATA]
+            const newBoard: ColumnInterface[] = KANBAN_DATA.map((column: ColumnInterface) => ({
+                ...column,
+                items: [],
+            }))
             const deals: DealInterface[] = data.documents as unknown as DealInterface[]
-            console.log(newBoard, deals)
-
             deals.forEach((deal: DealInterface): void => {
                 const column: ColumnInterface | undefined = newBoard.find((col: ColumnInterface): boolean => col.id === deal.status)
                 if (column) {
-                    column.items.push({
-                        id: deal.$id,
-                        $createdAt: deal.$createdAt,
-                        name: deal.name,
-                        price: deal.price,
-                        companyName: deal.customer.name,
-                        status: column.name
-                    })
+
+
+                    try {
+                        column.items.push({
+                            id: deal.$id,
+                            $createdAt: deal.$createdAt,
+                            name: deal.name,
+                            price: deal.price,
+                            companyName: deal.customers.name,
+                            status: column.name,
+                        })
+                    } catch (e) {
+                        console.log('e', e)
+                    }
                 }
             })
-
             return newBoard
         },
     })

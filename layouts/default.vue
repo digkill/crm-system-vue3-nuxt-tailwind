@@ -9,7 +9,6 @@ const router = useRouter()
 onMounted(async () => {
   try {
     const user = await account.get()
-    console.log('user', user)
     if (user) store.set(user)
   } catch (error) {
     await router.push('/login')
@@ -18,12 +17,10 @@ onMounted(async () => {
   }
 })
 
-console.log('isLoadingStore.isLoading', isLoadingStore.isLoading)
-
 </script>
 
 <template>
-  <LayoutLoader v-if="isLoadingStore.isLoading" />
+  <CommonLoader v-if="isLoadingStore.isLoading" />
   <section v-else :class="{ grid: store.isAuth }" style="min-height: 100vh">
     <CommonSidebar v-if="store.isAuth"/>
     <div class="container">
